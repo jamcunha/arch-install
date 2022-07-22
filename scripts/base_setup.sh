@@ -16,10 +16,10 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 # In case you need to change the keyboard layout
 # echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
 
-echo $HOSTNAME >> /etc/hostname
+echo $HOST_NAME >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1 localhost" >> /etc/hosts
-echo "127.0.1.1 $HOSTNAME" >> /etc/hosts
+echo "127.0.1.1 $HOST_NAME" >> /etc/hosts
 
 echo "root:$ROOT_PASSWD" | chpasswd
 
