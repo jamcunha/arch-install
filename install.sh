@@ -7,6 +7,9 @@ export NAME="name"
 export HOST_NAME="hostname"
 export PASSWD="passwd"
 export ROOT_PASSWD=$PASSWD
+export KB_LAYOUT=""
+export LOC="en_US.UTF-8" # Locale (Need to be uncommented on locale.gen)
+# To add more locales go to scripts/base_setup.sh
 
 bash $DIR/scripts/pre_chroot.sh
 
