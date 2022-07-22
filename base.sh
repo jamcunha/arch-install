@@ -2,8 +2,6 @@
 
 ## WARNING: Still not tested ##
 
-### Post mount install ###
-
 #############
 # Variables #
 #############
@@ -23,6 +21,20 @@ hostname="hostname"
 #################
 # Start Install #
 #################
+
+# Update system clock
+timedatectl set-ntp true
+
+# Enable parallel downloads
+sed -i "s/#ParallelDownloads/ParallelDownloads" /etc/pacman.conf
+
+## Partitioning and mounting should be done before running the script ##
+
+pacstrap /mnt base linux linux-firmware --noconfirm --needed
+
+genfstab -U /mnt >> /etc/fstab
+
+arch-chroot /mnt
 
 ## To find you region and city run timedatectl list-timezones and the format is (Region/City)
 ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
