@@ -26,13 +26,13 @@ hostname="hostname"
 timedatectl set-ntp true
 
 # Enable parallel downloads
-sed -i "s/#ParallelDownloads/ParallelDownloads" /etc/pacman.conf
+sed -i "s/#ParallelDownloads/ParallelDownloads/" /etc/pacman.conf
 
 ## Partitioning and mounting should be done before running the script ##
 
 pacstrap /mnt base linux linux-firmware --noconfirm --needed
 
-genfstab -U /mnt >> /etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt
 
