@@ -49,10 +49,18 @@ fi
 # Network setup
 
 pacman -S --noconfirm --needed networkmanager dhclient dialog avahi
-systemctl enable --now NetworkManager
-systemctl enable --now avahi-daemon
+systemctl enable NetworkManager
+systemctl enable avahi-daemon
 
 if $WIFI_OPT; then
   pacman -S --noconfirm --needed wpa_supplicant
 fi
+
+if $BT_OPT; then
+  pacman -S --noconfirm --needed bluez bluez-utils
+  systemctl enable bluetooth
+fi
+
+# Base packages
+pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa
 
