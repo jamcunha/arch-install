@@ -11,6 +11,7 @@ export KB_LAYOUT=""
 export LOC="en_US.UTF-8" # Locale (Need to be uncommented on locale.gen)
 # To add more locales go to scripts/base_setup.sh
 export DUALBOOT_OPT=true # true to have dualboot option, else false
+export WIFI_OPT=false # true if wifi is needed
 
 bash $DIR/scripts/pre_chroot.sh
 

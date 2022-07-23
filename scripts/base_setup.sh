@@ -35,13 +35,24 @@ fi
 
 # Boot manager
 pacman -S --noconfirm --needed grub efibootmgr
+pacman -S --noconfirm --needed dosfstools # Dont know where to put it
 
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 if $DUALBOOT_OPT; then
   pacman -S --noconfirm --needed os-prober
-  echo "GRUB_DISABLE_OS_PROBER=false" >> /etc/default/grub
+  sed -i "s/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g" /etc/default/grub
   grub-mkconfig -o /boot/grub/grub.cfg
+fi
+
+# Network setup
+
+pacman -S --noconfirm --needed networkmanager dhclient dialog avahi
+systemctl enable --now NetworkManager
+systemctl enable --now avahi-daemon
+
+if $WIFI_OPT; then
+  pacman -S --noconfirm --needed wpa_supplicant
 fi
 
