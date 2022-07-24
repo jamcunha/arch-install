@@ -3,10 +3,10 @@
 ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 hwclock --systohc
 
-sed -i "s/#en_US.UTF-8/en_US.UTF-8/g" /etc/locale.gen
+sed -i "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen
 # If you need more locales add other seds
 # example:
-sed -i "s/#en_GB.UTF-8/en_GB.UTF-8/g" /etc/locale.gen
+sed -i "s/#en_GB.UTF-8/en_GB.UTF-8/" /etc/locale.gen
 
 locale-gen
 
@@ -22,6 +22,9 @@ echo "::1 localhost" >> /etc/hosts
 echo "127.0.1.1 $HOST_NAME" >> /etc/hosts
 
 echo "root:$ROOT_PASSWD" | chpasswd
+
+# Add sudo with no password
+sed -i "s/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/" /etc/sudoers
 
 # Install microcode for Intel and AMD cpu
 cpu_type=$(lscpu | grep "Vendor ID:" | cut -d ":" -f 2)
@@ -42,7 +45,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 if $DUALBOOT_OPT; then
   pacman -S --noconfirm --needed os-prober
-  sed -i "s/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g" /etc/default/grub
+  sed -i "s/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/" /etc/default/grub
   grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
@@ -67,4 +70,10 @@ fi
 
 # Base packages
 pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa 
+
+# Add user
+
+useradd -m $NAME
+echo "$NAME:$PASSWD" >> chpasswd
+usermod -aG wheel $NAME
 
