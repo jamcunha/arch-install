@@ -71,6 +71,9 @@ fi
 # Base packages
 pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa 
 
+# Audio settings (may need after install config)
+pacman -S --noconfirm --needed alsa-utils alsa-plugins pipewire pipewire-alsa pipewire-jack pipewire-pulse pavucontrol
+
 # Add user
 
 useradd -m $NAME
