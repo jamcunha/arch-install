@@ -11,9 +11,12 @@ With this project I intend to learn some bash script and how Arch works
   - [x] After mount
   - [x] Boot loader
   - [x] Network
+  - [x] Audio (may need after install config)
+  - [ ] Graphics drivers
   
 - ### "Custom" install of packages (depending on what I will need on the device)
-  - [ ] (Still need to think about)
+  - [x] AUR helper
+  - [x] Login display manager
 
 - ### A separate install for DE/WM
   - [ ] i3

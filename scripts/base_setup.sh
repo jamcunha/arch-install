@@ -69,7 +69,7 @@ if $NTFS_OPT; then
 fi
 
 # Base packages
-pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa 
+pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa linux-headers base-devel
 
 # Audio settings (may need after install config)
 pacman -S --noconfirm --needed alsa-utils alsa-plugins pipewire pipewire-alsa pipewire-jack pipewire-pulse pavucontrol
@@ -79,4 +79,15 @@ pacman -S --noconfirm --needed alsa-utils alsa-plugins pipewire pipewire-alsa pi
 useradd -m $NAME
 echo "$NAME:$PASSWD" >> chpasswd
 usermod -aG wheel $NAME
+
+if [[ $AUR_OPT == "paru" ]]; then
+  pacman -S --noconfirm --needed git
+  git clone https://aur.archlinux.org/paru.git /DELETE_AFTER && cd /DELETE_AFTER/paru
+  makepkg -si --noconfirm
+fi
+
+if [[ $LDM_OPT == "lightdm" ]]; then
+  pacman -S --noconfirm --needed lightdm lightdm-gtk-greeter
+  systemctl enable lightdm
+fi
 
