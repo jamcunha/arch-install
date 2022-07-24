@@ -13,6 +13,7 @@ export LOC="en_US.UTF-8" # Locale (Need to be uncommented on locale.gen)
 export DUALBOOT_OPT=true # true to have dualboot option, else false
 export WIFI_OPT=false # true if wifi is needed
 export BT_OPT=false # true if bluetooth is needed
+export NTFS_OPT=false # true if nfts filesystem support is needed
 
 bash $DIR/scripts/pre_chroot.sh
 

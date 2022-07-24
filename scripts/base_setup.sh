@@ -61,6 +61,10 @@ if $BT_OPT; then
   systemctl enable bluetooth
 fi
 
+if $NTFS_OPT; then
+  pacman -S --noconfirm -needed ntfs-3g
+fi
+
 # Base packages
-pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa
+pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa 
 
