@@ -27,6 +27,8 @@ export NTFS_OPT=false # true if nfts filesystem support is needed
 export AUR_OPT=""
 # Login display manager available: "lightdm"
 export LDM_OPT=""
+# Graphics driver available: "nvidia"
+export GD_OPT=""
 
 bash $DIR/scripts/pre_chroot.sh
 

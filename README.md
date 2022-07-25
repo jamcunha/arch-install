@@ -21,3 +21,7 @@ With this project I intend to learn some bash script and how Arch works
 - ### A separate install for DE/WM
   - [ ] i3
 
+## How to use
+
+Modify the install.sh script acording to your needs and then run it.
+
