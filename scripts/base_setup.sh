@@ -69,7 +69,7 @@ if $NTFS_OPT; then
 fi
 
 # Base packages
-pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa linux-headers base-devel
+pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils mesa linux-headers base-devel xorg
 
 # Audio settings (may need after install config)
 pacman -S --noconfirm --needed alsa-utils alsa-plugins pipewire pipewire-alsa pipewire-jack pipewire-pulse pavucontrol
