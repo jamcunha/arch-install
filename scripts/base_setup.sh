@@ -5,8 +5,8 @@ hwclock --systohc
 
 sed -i "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen
 # If you need more locales add other seds
-# example:
-sed -i "s/#en_GB.UTF-8/en_GB.UTF-8/" /etc/locale.gen
+# Example:
+# sed -i "s/#en_GB.UTF-8/en_GB.UTF-8/" /etc/locale.gen
 
 locale-gen
 
@@ -23,7 +23,7 @@ echo "127.0.1.1 $HOST_NAME" >> /etc/hosts
 
 echo "root:$ROOT_PASSWD" | chpasswd
 
-# Add sudo with no password
+# Add sudo with no password (If needed to install some package as user during the script [TO BE CHANGE AFTER IN THE SCRIPT])
 sed -i "s/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/" /etc/sudoers
 
 # Install microcode for Intel and AMD cpu
@@ -75,13 +75,13 @@ pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils linux-he
 pacman -S --noconfirm --needed alsa-utils alsa-plugins pipewire pipewire-alsa pipewire-jack pipewire-pulse pavucontrol
 
 if [[ $GD_OPT == "nvidia" ]]; then
-  pacman -S --noconfirm --needed nvidia
+  pacman -S --noconfirm --needed nvidia nvidia-utils
 fi
 
 # Add user
 
 useradd -m $NAME
-echo "$NAME:$PASSWD" >> chpasswd
+echo "$NAME:$PASSWD" | chpasswd
 usermod -aG wheel $NAME
 
 if [[ $AUR_OPT == "paru" ]]; then
