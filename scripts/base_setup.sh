@@ -3,11 +3,7 @@
 ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 hwclock --systohc
 
-sed -i "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen
-# If you need more locales add other seds
-# Example:
-# sed -i "s/#en_GB.UTF-8/en_GB.UTF-8/" /etc/locale.gen
-
+sed -i "s/#$LOC/$LOC/" /etc/locale.gen
 locale-gen
 
 echo "LANG=$LOC" >> /etc/locale.conf
@@ -41,13 +37,13 @@ pacman -S --noconfirm --needed grub efibootmgr
 pacman -S --noconfirm --needed dosfstools # Dont know where to put it
 
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub/grub.cfg
 
 if $DUALBOOT_OPT; then
   pacman -S --noconfirm --needed os-prober
   sed -i "s/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/" /etc/default/grub
-  grub-mkconfig -o /boot/grub/grub.cfg
 fi
+
+grub-mkconfig -o /boot/grub/grub.cfg
 
 # Network setup
 
@@ -65,7 +61,7 @@ if $BT_OPT; then
 fi
 
 if $NTFS_OPT; then
-  pacman -S --noconfirm -needed ntfs-3g
+  pacman -S --noconfirm --needed ntfs-3g
 fi
 
 # Base packages
@@ -75,7 +71,7 @@ pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils linux-he
 pacman -S --noconfirm --needed alsa-utils alsa-plugins pipewire pipewire-alsa pipewire-jack pipewire-pulse pavucontrol
 
 if [[ $GD_OPT == "nvidia" ]]; then
-  pacman -S --noconfirm --needed nvidia nvidia-utils
+  pacman -S --noconfirm --needed nvidia nvidia-utils lib32-nvidia-utils
 fi
 
 # Add user

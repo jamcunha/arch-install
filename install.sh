@@ -12,8 +12,7 @@ export HOST_NAME="hostname"
 export PASSWD="passwd"
 export ROOT_PASSWD=$PASSWD
 export KB_LAYOUT=""
-export LOC="en_US.UTF-8" # Locale (Need to be uncommented on locale.gen)
-# To add more locales go to scripts/base_setup.sh
+export LOC="en_US.UTF-8"
 export DUALBOOT_OPT=true # true to have dualboot option, else false
 export WIFI_OPT=false # true if wifi is needed
 export BT_OPT=false # true if bluetooth is needed
