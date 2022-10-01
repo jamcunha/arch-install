@@ -20,7 +20,7 @@ echo "127.0.1.1 $HOST_NAME" >> /etc/hosts
 echo "root:$ROOT_PASSWD" | chpasswd
 
 # Add sudo with no password (If needed to install some package as user during the script [TO BE CHANGE AFTER IN THE SCRIPT])
-sed -i "s/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/" /etc/sudoers
+sed -i "s/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/" /etc/sudoers
 
 # Install microcode for Intel and AMD cpu
 cpu_type=$(lscpu | grep "Vendor ID:" | cut -d ":" -f 2)
