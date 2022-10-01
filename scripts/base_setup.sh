@@ -80,15 +80,10 @@ useradd -m $NAME
 echo "$NAME:$PASSWD" | chpasswd
 usermod -aG wheel $NAME
 
-if [[ $AUR_OPT == "paru" ]]; then
-  pacman -S --noconfirm --needed git
-  mkdir /DELETE_AFTER/paru
-  git clone https://aur.archlinux.org/paru.git /DELETE_AFTER/paru && cd /DELETE_AFTER/paru
-  makepkg -si --noconfirm
-fi
-
 if [[ $LDM_OPT == "lightdm" ]]; then
   pacman -S --noconfirm --needed lightdm lightdm-gtk-greeter
   systemctl enable lightdm
 fi
+
+exit
 
