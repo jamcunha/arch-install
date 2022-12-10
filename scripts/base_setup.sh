@@ -19,9 +19,6 @@ echo "127.0.1.1 $HOST_NAME" >> /etc/hosts
 
 echo "root:$ROOT_PASSWD" | chpasswd
 
-# Add sudo with no password (If needed to install some package as user during the script [TO BE CHANGE AFTER IN THE SCRIPT])
-sed -i "s/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/" /etc/sudoers
-
 # Install microcode for Intel and AMD cpu
 cpu_type=$(lscpu | grep "Vendor ID:" | cut -d ":" -f 2)
 cpu_type=$(echo $cpu_type)
@@ -65,7 +62,7 @@ if $NTFS_OPT; then
 fi
 
 # Base packages
-pacman -S --noconfirm --needed xdg-utils xdg-user-dir usbutils binutils linux-headers base-devel xorg
+pacman -S --noconfirm --needed xdg-utils xdg-user-dirs usbutils binutils linux-headers base-devel xorg
 
 # Audio settings (may need after install config)
 pacman -S --noconfirm --needed alsa-utils alsa-plugins pipewire pipewire-alsa pipewire-jack pipewire-pulse pavucontrol
@@ -79,6 +76,9 @@ fi
 useradd -m $NAME
 echo "$NAME:$PASSWD" | chpasswd
 usermod -aG wheel $NAME
+
+# Add sudo with no password (If needed to install some package as user during the script [TO BE CHANGE AFTER IN THE SCRIPT])
+sed -i "s/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/" /etc/sudoers
 
 if [[ $LDM_OPT == "lightdm" ]]; then
   pacman -S --noconfirm --needed lightdm lightdm-gtk-greeter

@@ -13,7 +13,7 @@ export PASSWD="passwd"
 export ROOT_PASSWD=$PASSWD
 export KB_LAYOUT=""
 export LOC="en_US.UTF-8"
-export DUALBOOT_OPT=true # true to have dualboot option, else false
+export DUALBOOT_OPT=false # true to have dualboot option, else false
 export WIFI_OPT=false # true if wifi is needed
 export BT_OPT=false # true if bluetooth is needed
 export NTFS_OPT=false # true if nfts filesystem support is needed
@@ -33,7 +33,9 @@ bash $DIR/scripts/pre_chroot.sh
 
 cp -r $DIR /mnt/DELETE_AFTER
 
-arch-chroot /mnt bash /DELETE_AFTER/scripts/base_setup.sh
+arch-chroot /mnt /bin/bash /DELETE_AFTER/scripts/base_setup.sh
 
-arch-chroot /mnt -u $NAME bash /DELETE_AFTER/scripts/post_setup.sh
+# arch-chroot /mnt -u $NAME bash /DELETE_AFTER/scripts/post_setup.sh
+
+rm -rf /mnt/DELETE_AFTER
 
