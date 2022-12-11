@@ -35,7 +35,5 @@ cp -r $DIR /mnt/DELETE_AFTER
 
 arch-chroot /mnt /bin/bash /DELETE_AFTER/scripts/base_setup.sh
 
-# arch-chroot /mnt -u $NAME bash /DELETE_AFTER/scripts/post_setup.sh
-
 rm -rf /mnt/DELETE_AFTER
 

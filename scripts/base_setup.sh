@@ -80,6 +80,15 @@ usermod -aG wheel $NAME
 # Add sudo with no password (If needed to install some package as user during the script [TO BE CHANGE AFTER IN THE SCRIPT])
 sed -i "s/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/" /etc/sudoers
 
+#
+# Post setup stuff
+#
+
+
+if [[ $AUR_OPT == "paru" ]]; then
+    su $NAME -c "bash ./post_setup/paru.sh"
+fi
+
 if [[ $LDM_OPT == "lightdm" ]]; then
   pacman -S --noconfirm --needed lightdm lightdm-gtk-greeter
   systemctl enable lightdm
